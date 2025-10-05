@@ -97,14 +97,16 @@
     <img src="Sigiriya.jpg" alt="Travel 2">
     <img src="Galle Fort.png" alt="Travel 3">
 </div>
+
+
 <script>
-    $(function() {
-        var $imgs = $('.slider-bg img');
+    document.addEventListener('DOMContentLoaded', function() {
+        var imgs = document.querySelectorAll('.slider-bg img');
         var idx = 0;
         setInterval(function() {
-            $imgs.eq(idx).removeClass('active');
-            idx = (idx + 1) % $imgs.length;
-            $imgs.eq(idx).addClass('active');
+            imgs[idx].classList.remove('active');
+            idx = (idx + 1) % imgs.length;
+            imgs[idx].classList.add('active');
         }, 4000);
     });
 </script>
