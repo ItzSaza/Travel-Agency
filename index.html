@@ -62,27 +62,33 @@
     <p>Your gateway to unforgettable travel experiences.</p>
 </div>
 <style>
-    .slider-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
+.slider-bg {
+     position: fixed;
+
+
+        top: 0;left: 0;
+
         width: 100vw;
         height: 100vh;
         z-index: -1;
         overflow: hidden;
+        /* overflow:scroll; */
     }
     .slider-bg img {
         width: 100vw;
         height: 100vh;
+       
+       
         object-fit: cover;
         position: absolute;
         top: 0;
+        /* top: 120px; */
         left: 0;
         opacity: 0;
         transition: opacity 1s ease-in-out;
     }
     .slider-bg img.active {
-        opacity: 1;
+         opacity: 1;
     }
 </style>
 <div class="slider-bg">
