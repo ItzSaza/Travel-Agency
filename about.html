@@ -87,42 +87,60 @@
         </div>
         </div>
         <script>
-            $(document).ready(function(){
+        $(document).ready(function(){
 
-            // 1️⃣ Click event — when any "Call" button is clicked
-            $(".btn-primary").click(function(){
-                alert("📞 Calling the guide...");
+        // 🔹 Click event - Call button
+        $(".btn-primary").on("click", function(){
+            $(this).text("Calling...").delay(800).queue(function(next){
+            $(this).text("Call");
+            next();
             });
+        });
 
-            // 2️⃣ Double-click event — when a guide's image is double-clicked
-            $("img").dblclick(function(){
-                $(this).css("border", "3px solid orange");
-                alert("You liked this guide!");
+        // 🔹 Double-click event - Guide image
+        $("img").on("dblclick", function(){
+            $(this)
+            .css({"border": "3px solid #f39c12", "transition": "0.3s"})
+            .fadeOut(100).fadeIn(100);
+        });
+
+        // 🔹 Hover event - Highlight guide card
+        $(".col-md-4").hover(
+            function(){
+            $(this).css({
+                "background-color": "#f7f7f7",
+                "box-shadow": "0 0 10px rgba(0,0,0,0.1)",
+                "border-radius": "10px",
+                "transition": "0.3s"
             });
-
-            // 3️⃣ Hover event — change background color when hovering over guide cards
-            $(".col-md-4").hover(
-                function(){
-                $(this).css("background-color", "#f9f9f9");
-                },
-                function(){
-                $(this).css("background-color", "white");
-                }
-            );
-
-            // 4️⃣ Mouse enter and leave event — highlight the guide name
-            $("h4").mouseenter(function(){
-                $(this).css("color", "blue");
-            }).mouseleave(function(){
-                $(this).css("color", "black");
+            },
+            function(){
+            $(this).css({
+                "background-color": "transparent",
+                "box-shadow": "none"
             });
+            }
+        );
 
-            // 5️⃣ When "Back to Home" button is clicked
-            $(".btn-default").click(function(){
-                alert("Returning to Home Page 🏠");
-            });
+        // 🔹 Mouse enter / leave - guide names
+        $("h4").on({
+            mouseenter: function(){
+            $(this).css({"color": "#007bff", "transition": "0.3s"});
+            },
+            mouseleave: function(){
+            $(this).css("color", "black");
+            }
+        });
 
-            });
+        // 🔹 Back to home button
+        $(".btn-default").on("click", function(){
+            $(this)
+            .fadeOut(200)
+            .fadeIn(200)
+            .text("Loading Home...");
+        });
+
+        });
         </script>
     </body>
 </html>

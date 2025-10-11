@@ -116,5 +116,62 @@
                 <a href="index.html" class="btn btn-default">Back to Home</a>
             </div>
         </div>  
+        <script>
+        $(document).ready(function(){
+
+        // 🌍 Hover effect on destination cards
+        $(".col-md-4").hover(
+            function(){
+            $(this).css({
+                "background-color": "#f8f8f8",
+                "transform": "scale(1.03)",
+                "box-shadow": "0 4px 12px rgba(0,0,0,0.15)",
+                "transition": "all 0.3s ease"
+            });
+            },
+            function(){
+            $(this).css({
+                "background-color": "transparent",
+                "transform": "scale(1)",
+                "box-shadow": "none"
+            });
+            }
+        );
+
+        // 🖼️ Double-click event on images — highlight them briefly
+        $("img").on("dblclick", function(){
+            $(this)
+            .css({"border": "3px solid #5cb85c", "transition": "0.3s"})
+            .fadeOut(100).fadeIn(100);
+        });
+
+        // 🏷️ Mouse enter / leave — animate destination names
+        $("h4").on({
+            mouseenter: function(){
+            $(this).css({
+                "color": "#337ab7",
+                "letter-spacing": "1px",
+                "transition": "0.3s"
+            });
+            },
+            mouseleave: function(){
+            $(this).css({
+                "color": "black",
+                "letter-spacing": "normal"
+            });
+            }
+        });
+
+        // 🏠 Back to home button click animation
+        $(".btn-default").on("click", function(){
+            $(this)
+            .text("Returning Home...")
+            .fadeOut(300)
+            .fadeIn(300)
+            .text("Back to Home");
+        });
+
+        });
+        </script>
     </body>
 </html>
