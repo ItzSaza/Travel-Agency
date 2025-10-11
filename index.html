@@ -115,6 +115,82 @@
             imgs[idx].classList.add('active');
         }, 4000);
     });
+     // 1️⃣ Click event — when "See Destinations" button is clicked
+  $(".btn-secondary").click(function(){
+    alert("🌍 Taking you to Destinations page!");
+  });
+
+  // 2️⃣ Hover event — when hovering over navbar links
+  $(".nav > li > a").hover(
+    function(){
+      $(this).css({
+        "background-color": "#b3e5fc",
+        "color": "black",
+        "border-radius": "5px"
+      });
+    },
+    function(){
+      $(this).css({
+        "background-color": "",
+        "color": ""
+      });
+    }
+  );
+
+  // 3️⃣ Mouse enter & leave — highlight welcome heading
+  $("h1").mouseenter(function(){
+    $(this).css({
+      "color": "#ff9800",
+      "text-shadow": "2px 2px 10px rgba(0,0,0,0.3)"
+    });
+  }).mouseleave(function(){
+    $(this).css({
+      "color": "white",
+      "text-shadow": "none"
+    });
+  });
+
+  // 4️⃣ Double-click event — when user double-clicks the paragraph
+  $("p").dblclick(function(){
+    $(this).fadeOut(500).fadeIn(800);
+    alert("✨ You liked the description!");
+  });
+
+  // 5️⃣ Navbar brand click — adds a quick visual animation
+  $(".navbar-brand").click(function(){
+    $(this).fadeOut(150).fadeIn(400);
+  });
+
+  // 6️⃣ Latch feature — toggle background slider stop/start
+  let sliderActive = true;
+  $(".slider-bg").click(function(){
+    sliderActive = !sliderActive;
+    if(sliderActive){
+      alert("▶️ Background slideshow resumed!");
+      startSlider();
+    } else {
+      alert("⏸️ Background slideshow paused!");
+      clearInterval(sliderInterval);
+    }
+  });
+
+  // 🌄 Background slider control (same logic but controlled by latch)
+  let imgs = $(".slider-bg img");
+  let idx = 0;
+  let sliderInterval;
+
+  function startSlider(){
+    clearInterval(sliderInterval);
+    sliderInterval = setInterval(function(){
+      imgs.eq(idx).removeClass("active");
+      idx = (idx + 1) % imgs.length;
+      imgs.eq(idx).addClass("active");
+    }, 4000);
+  }
+
+  // Start automatically
+  startSlider();
+
 </script>
 </body>
 </html>
