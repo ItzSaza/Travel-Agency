@@ -61,7 +61,7 @@
             <div class="col-md-4 text-center">
                 <img src="kandy.jpg" class="img-responsive img-rounded center-block" alt="Kandy">
                 <h4>Kandy</h4>
-                <p>Famous for the Temple of the Tooth and its beautiful Lake.</p>
+                <p>Famous for the Temple of the Tooth and its beautiful ancient Lake.</p>
             </div>
             <div class="col-md-4 text-center">
                 <img src="galle.jpg" class="img-responsive img-rounded center-block" alt="Galle">
@@ -99,10 +99,9 @@
 
         <!-- DOM Traversal Demo -->
         <div class="text-center">
-            <h3>✨ Explore Destinations with jQuery</h3>
+            <h3>✨ Explore Destinations</h3>
             <button id="highlightAncient" class="btn btn-warning">Highlight Historical Destinations</button>
             <button id="countDestinations" class="btn btn-info">Count Total Destinations</button>
-            <button id="colorByOrder" class="btn btn-success">Color Destinations by Order</button>
             <div class="message" id="messageArea"></div>
         </div>
 
@@ -132,18 +131,6 @@
         $('#countDestinations').click(function() {
             let total = $('.row > .col-md-4').length;
             $('#messageArea').text('📍 Total destinations listed: ' + total);
-        });
-
-        // Color destinations by their order
-        $('#colorByOrder').click(function() {
-            $('.row > .col-md-4').each(function(index) {
-                if (index % 2 === 0) {
-                    $(this).css('background-color', '#e0f7fa'); // even
-                } else {
-                    $(this).css('background-color', '#ffe0b2'); // odd
-                }
-            });
-            $('#messageArea').text('🎨 Colored destinations based on their order.');
         });
     </script>
 </body>
