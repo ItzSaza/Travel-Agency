@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyrixo Music | jQuery Demo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body { background: #111; color: white; }
+    .highlight { background-color: #f39c12; color: #000; }
+  </style>
+</head>
+
+<body class="text-center p-4">
+  <h1>🎸 Lyrixo Music jQuery Demo</h1>
+
+  <hr>
+
+  <!-- DOM Traversal -->
+  <div class="container mt-4" id="traversal-section">
+    <h2>1️⃣ DOM Traversal</h2>
+    <ul class="list-group w-50 mx-auto">
+      <li class="list-group-item">Guitar</li>
+      <li class="list-group-item">Drums</li>
+      <li class="list-group-item">Keyboard</li>
+    </ul>
+    <button class="btn btn-warning mt-3" id="btn-traverse">Highlight 2nd Item</button>
+  </div>
+
+  <hr>
+
+  <!-- DOM Modification -->
+  <div class="container mt-4" id="modification-section">
+    <h2>2️⃣ DOM Modification</h2>
+    <div id="products" class="mt-3"></div>
+    <button class="btn btn-info" id="add-product">Add Product</button>
+    <button class="btn btn-danger" id="remove-product">Remove Last</button>
+  </div>
+
+  <hr>
+
+  <!-- DOM Attribute Modification -->
+  <div class="container mt-4" id="attribute-section">
+    <h2>3️⃣ DOM Attribute Modification</h2>
+    <img src="https://via.placeholder.com/150" id="instrument" alt="Instrument" class="mt-3 rounded">
+    <br>
+    <button class="btn btn-primary mt-3" id="change-attr">Change Image</button>
+  </div>
+
+  <hr>
+
+  <!-- CSS Manipulation -->
+  <div class="container mt-4" id="css-section">
+    <h2>4️⃣ CSS Manipulation</h2>
+    <p class="lead mt-3">Click buttons to change text color</p>
+    <button class="btn btn-success" id="green">Green</button>
+    <button class="btn btn-danger" id="red">Red</button>
+    <button class="btn btn-secondary" id="reset">Reset</button>
+  </div>
+
+  <hr>
+
+  <!-- JavaScript Effects -->
+  <div class="container mt-4" id="effects-section">
+    <h2>5️⃣ JavaScript Effects</h2>
+    <div id="box" style="width:150px; height:150px; background:#3498db; margin:auto; border-radius:10px;"></div>
+    <button class="btn btn-light mt-3" id="hide">Hide</button>
+    <button class="btn btn-light mt-3" id="show">Show</button>
+    <button class="btn btn-light mt-3" id="fade">Fade Toggle</button>
+  </div>
+
+  <hr>
+
+  <!-- HTML Events -->
+  <div class="container mt-4" id="events-section">
+    <h2>6️⃣ HTML Events</h2>
+    <input type="text" id="username" class="form-control w-50 mx-auto mt-3" placeholder="Type your name">
+    <button class="btn btn-warning mt-3" id="greet">Greet</button>
+    <p id="output" class="mt-3"></p>
+  </div>
+
+  <script>
+    // 1. DOM Traversal
+    $('#btn-traverse').click(function() {
+      $('#traversal-section li').eq(1).toggleClass('highlight');
+    });
+
+    // 2. DOM Modification
+    $('#add-product').click(function() {
+      $('#products').append('<p>🎶 New Music Product Added!</p>');
+    });
+    $('#remove-product').click(function() {
+      $('#products p:last').remove();
+    });
+
+    // 3. DOM Attribute Modification
+    $('#change-attr').click(function() {
+      $('#instrument').attr('src', 'https://via.placeholder.com/150/ff0000/ffffff');
+    });
+
+    // 4. CSS Manipulation
+    $('#green').click(() => $('p.lead').css('color', 'lime'));
+    $('#red').click(() => $('p.lead').css('color', 'red'));
+    $('#reset').click(() => $('p.lead').css('color', 'white'));
+
+    // 5. JavaScript Effects
+    $('#hide').click(() => $('#box').slideUp());
+    $('#show').click(() => $('#box').slideDown());
+    $('#fade').click(() => $('#box').fadeToggle());
+
+    // 6. HTML Events
+    $('#greet').click(() => {
+      let name = $('#username').val();
+      $('#output').text('Hello, ' + name + '! 🎵');
+    });
+    $('#username').on('focus', function() {
+      $(this).css('background-color', '#222');
+    }).on('blur', function() {
+      $(this).css('background-color', '#fff');
+    });
+  </script>
+
+</body>
+</html>
