@@ -155,34 +155,10 @@
     });
   });
 
-  // 4️⃣ Double-click event — when user double-clicks the paragraph
-  $("p").dblclick(function(){
-    $(this).fadeOut(500).fadeIn(800);
-    alert("✨ You liked the description!");
-  });
-
   // 5️⃣ Navbar brand click — adds a quick visual animation
   $(".navbar-brand").click(function(){
     $(this).fadeOut(150).fadeIn(400);
   });
-
-  // 6️⃣ Latch feature — toggle background slider stop/start
-  let sliderActive = true;
-  $(".slider-bg").click(function(){
-    sliderActive = !sliderActive;
-    if(sliderActive){
-      alert("▶️ Background slideshow resumed!");
-      startSlider();
-    } else {
-      alert("⏸️ Background slideshow paused!");
-      clearInterval(sliderInterval);
-    }
-  });
-
-  // 🌄 Background slider control (same logic but controlled by latch)
-  let imgs = $(".slider-bg img");
-  let idx = 0;
-  let sliderInterval;
 
   function startSlider(){
     clearInterval(sliderInterval);
