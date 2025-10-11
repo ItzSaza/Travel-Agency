@@ -61,7 +61,7 @@
             <div class="col-md-4 text-center">
                 <img src="kandy.jpg" class="img-responsive img-rounded center-block" alt="Kandy">
                 <h4>Kandy</h4>
-                <p>Famous for the Temple of the Tooth and its beautiful ancient Lake.</p>
+                <p>Famous for the Temple of the Tooth and its beautiful Lake.</p>
             </div>
             <div class="col-md-4 text-center">
                 <img src="galle.jpg" class="img-responsive img-rounded center-block" alt="Galle">
@@ -88,7 +88,6 @@
                 <h4>Ella</h4>
                 <p>A peaceful mountain village with tea fields, waterfalls, and the famous Nine Arches Bridge.</p>
             </div>
-<<<<<<< HEAD
             <div class="col-md-4 text-center">
                 <img src="anuradha.webp" class="img-responsive img-rounded center-block" alt="Anuradhapura">
                 <h4>Anuradhapura</h4>
@@ -100,9 +99,10 @@
 
         <!-- DOM Traversal Demo -->
         <div class="text-center">
-            <h3>✨ Explore Destinations</h3>
-            <button id="highlightAncient" class="btn btn-warning">Highlight Historical Ancient Destinations</button>
+            <h3>✨ Explore Destinations with jQuery</h3>
+            <button id="highlightAncient" class="btn btn-warning">Highlight Historical Destinations</button>
             <button id="countDestinations" class="btn btn-info">Count Total Destinations</button>
+            <button id="colorByOrder" class="btn btn-success">Color Destinations by Order</button>
             <div class="message" id="messageArea"></div>
         </div>
 
@@ -133,68 +133,18 @@
             let total = $('.row > .col-md-4').length;
             $('#messageArea').text('📍 Total destinations listed: ' + total);
         });
+
+        // Color destinations by their order
+        $('#colorByOrder').click(function() {
+            $('.row > .col-md-4').each(function(index) {
+                if (index % 2 === 0) {
+                    $(this).css('background-color', '#e0f7fa'); // even
+                } else {
+                    $(this).css('background-color', '#ffe0b2'); // odd
+                }
+            });
+            $('#messageArea').text('🎨 Colored destinations based on their order.');
+        });
     </script>
 </body>
 </html>
-=======
-        </div>  
-        <script>
-        $(document).ready(function(){
-
-        // 🌍 Hover effect on destination cards
-        $(".col-md-4").hover(
-            function(){
-            $(this).css({
-                "background-color": "#f8f8f8",
-                "transform": "scale(1.03)",
-                "box-shadow": "0 4px 12px rgba(0,0,0,0.15)",
-                "transition": "all 0.3s ease"
-            });
-            },
-            function(){
-            $(this).css({
-                "background-color": "transparent",
-                "transform": "scale(1)",
-                "box-shadow": "none"
-            });
-            }
-        );
-
-        // 🖼️ Double-click event on images — highlight them briefly
-        $("img").on("dblclick", function(){
-            $(this)
-            .css({"border": "3px solid #5cb85c", "transition": "0.3s"})
-            .fadeOut(100).fadeIn(100);
-        });
-
-        // 🏷️ Mouse enter / leave — animate destination names
-        $("h4").on({
-            mouseenter: function(){
-            $(this).css({
-                "color": "#337ab7",
-                "letter-spacing": "1px",
-                "transition": "0.3s"
-            });
-            },
-            mouseleave: function(){
-            $(this).css({
-                "color": "black",
-                "letter-spacing": "normal"
-            });
-            }
-        });
-
-        // 🏠 Back to home button click animation
-        $(".btn-default").on("click", function(){
-            $(this)
-            .text("Returning Home...")
-            .fadeOut(300)
-            .fadeIn(300)
-            .text("Back to Home");
-        });
-
-        });
-        </script>
-    </body>
-</html>
->>>>>>> 27db08e8ea3dd488a4277935acf49878a63c2183
