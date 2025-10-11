@@ -99,39 +99,42 @@
 
         <!-- DOM Traversal Demo -->
         <div class="text-center">
-            <h3>✨ Explore Destinations</h3>
-            <button id="highlightAncient" class="btn btn-warning">Highlight Historical Destinations</button>
-            <button id="countDestinations" class="btn btn-info">Count Total Destinations</button>
-            <div class="message" id="messageArea"></div>
-        </div>
+    <h3>✨ Explore Destinations</h3>
+    <button id="highlightAncient" class="btn btn-warning">Highlight Ancient Destinations</button>
+    <button id="countDestinations" class="btn btn-info">Count Total Destinations</button>
+    <div class="message" id="messageArea"></div>
+</div>
 
-        <hr>
-
-        <div class="text-center">
-            <a href="index.html" class="btn btn-default">Back to Home</a>
-        </div>
-    </div>  
-
-    <!-- jQuery DOM Traversal Script -->
-    <script>
-        // Highlight destinations with "ancient" in description
-        $('#highlightAncient').click(function() {
-            $('.row > .col-md-4').each(function() {
-                let desc = $(this).find('p').text().toLowerCase();
-                if (desc.includes('ancient')) {
-                    $(this).addClass('highlight');
-                } else {
-                    $(this).removeClass('highlight');
-                }
-            });
-            $('#messageArea').text('🗿 Highlighted historical/ancient destinations.');
+<script>
+    // Latch Button: Highlight Ancient Destinations (toggle)
+    $('#highlightAncient').click(function() {
+        $('.row > .col-md-4').each(function() {
+            let desc = $(this).find('p').text().toLowerCase();
+            if (desc.includes('ancient')) {
+                $(this).toggleClass('highlight'); // toggle instead of only add
+            }
         });
 
-        // Count total destinations
-        $('#countDestinations').click(function() {
+        // Update message
+        let highlighted = $('.highlight').length;
+        if (highlighted > 0) {
+            $('#messageArea').text('🗿 Highlighted historical/ancient destinations.');
+        } else {
+            $('#messageArea').text('✅ Highlight removed.');
+        }
+    });
+
+    // Latch Button: Count Total Destinations (only shows once, then toggle message)
+    let countToggled = false;
+    $('#countDestinations').click(function() {
+        if (!countToggled) {
             let total = $('.row > .col-md-4').length;
             $('#messageArea').text('📍 Total destinations listed: ' + total);
-        });
-    </script>
+        } else {
+            $('#messageArea').text('ℹ️ Ready to count again.');
+        }
+        countToggled = !countToggled;
+    });
+</script>
 </body>
 </html>
