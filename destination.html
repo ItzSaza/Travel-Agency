@@ -98,10 +98,12 @@
         <hr>
 
         <!-- DOM Traversal Demo -->
-        <div class="text-center">
+        <!-- DOM Traversal Demo -->
+<div class="text-center">
     <h3>✨ Explore Destinations</h3>
     <button id="highlightAncient" class="btn btn-warning">Highlight Ancient Destinations</button>
     <button id="countDestinations" class="btn btn-info">Count Total Destinations</button>
+    <button id="highlightLast" class="btn btn-success">Highlight Last Destination</button>
     <div class="message" id="messageArea"></div>
 </div>
 
@@ -111,11 +113,10 @@
         $('.row > .col-md-4').each(function() {
             let desc = $(this).find('p').text().toLowerCase();
             if (desc.includes('ancient')) {
-                $(this).toggleClass('highlight'); // toggle instead of only add
+                $(this).toggleClass('highlight');
             }
         });
 
-        // Update message
         let highlighted = $('.highlight').length;
         if (highlighted > 0) {
             $('#messageArea').text('🗿 Highlighted historical/ancient destinations.');
@@ -124,7 +125,7 @@
         }
     });
 
-    // Latch Button: Count Total Destinations (only shows once, then toggle message)
+    // Latch Button: Count Total Destinations
     let countToggled = false;
     $('#countDestinations').click(function() {
         if (!countToggled) {
@@ -135,6 +136,15 @@
         }
         countToggled = !countToggled;
     });
+
+    // Meaningful DOM Traversal: Highlight Last Destination
+    $('#highlightLast').click(function() {
+        let lastDest = $('.row > .col-md-4').last();
+        lastDest.toggleClass('highlight');
+        let lastName = lastDest.find('h4').text();
+        $('#messageArea').text('🏁 Highlighting final destination: ' + lastName);
+    });
 </script>
+
 </body>
 </html>
