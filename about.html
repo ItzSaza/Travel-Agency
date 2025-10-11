@@ -86,5 +86,43 @@
             <a href="index.html" class="btn btn-default">Back to Home</a>
         </div>
         </div>
+        <script>
+            $(document).ready(function(){
+
+            // 1️⃣ Click event — when any "Call" button is clicked
+            $(".btn-primary").click(function(){
+                alert("📞 Calling the guide...");
+            });
+
+            // 2️⃣ Double-click event — when a guide's image is double-clicked
+            $("img").dblclick(function(){
+                $(this).css("border", "3px solid orange");
+                alert("You liked this guide!");
+            });
+
+            // 3️⃣ Hover event — change background color when hovering over guide cards
+            $(".col-md-4").hover(
+                function(){
+                $(this).css("background-color", "#f9f9f9");
+                },
+                function(){
+                $(this).css("background-color", "white");
+                }
+            );
+
+            // 4️⃣ Mouse enter and leave event — highlight the guide name
+            $("h4").mouseenter(function(){
+                $(this).css("color", "blue");
+            }).mouseleave(function(){
+                $(this).css("color", "black");
+            });
+
+            // 5️⃣ When "Back to Home" button is clicked
+            $(".btn-default").click(function(){
+                alert("Returning to Home Page 🏠");
+            });
+
+            });
+        </script>
     </body>
 </html>
