@@ -95,9 +95,6 @@
             </div>
         </div>
 
-        <hr>
-
-        <!-- DOM Traversal Demo -->
         <!-- DOM Traversal Demo -->
 <div class="text-center">
     <h3>✨ Explore Destinations</h3>
@@ -107,8 +104,12 @@
     <div class="message" id="messageArea"></div>
 </div>
 
+<div class="text-center" style="margin-top: 20px;">
+    <a href="index.html" class="btn btn-default">Back to Home</a>
+</div>
+
 <script>
-    // Latch Button: Highlight Ancient Destinations (toggle)
+    // Highlight Ancient Destinations (toggle)
     $('#highlightAncient').click(function() {
         $('.row > .col-md-4').each(function() {
             let desc = $(this).find('p').text().toLowerCase();
@@ -125,7 +126,7 @@
         }
     });
 
-    // Latch Button: Count Total Destinations
+    // Count Total Destinations
     let countToggled = false;
     $('#countDestinations').click(function() {
         if (!countToggled) {
@@ -137,7 +138,7 @@
         countToggled = !countToggled;
     });
 
-    // Meaningful DOM Traversal: Highlight Last Destination
+    // Highlight Last Destination
     $('#highlightLast').click(function() {
         let lastDest = $('.row > .col-md-4').last();
         lastDest.toggleClass('highlight');
