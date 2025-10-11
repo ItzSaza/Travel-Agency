@@ -184,6 +184,28 @@
             .text("Back to Home");
         });
 
+        // 2️⃣ Hover event — when hovering over navbar links
+        $(".nav > li > a").hover(
+            function(){
+            $(this).css({
+                "background-color": "#b3e5fc",
+                "color": "black",
+                "border-radius": "5px"
+            });
+            },
+            function(){
+            $(this).css({
+                "background-color": "",
+                "color": ""
+            });
+            }
+        );
+
+        // 5️⃣ Navbar brand click — adds a quick visual animation
+        $(".navbar-brand").click(function(){
+            $(this).fadeOut(150).fadeIn(400);
+        });
+
         });
         </script>
     </body>
