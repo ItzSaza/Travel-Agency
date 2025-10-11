@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <title>Guides | GoTrip Sri Lanka</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Book friendly, licensed travel guides and drivers across Sri Lanka. Call, WhatsApp, or email directly." />
+  <meta name="theme-color" content="#0d6efd" />
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    /* Page tweaks */
+    body { scroll-behavior: smooth; }
+    .navbar { box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .hero {
+      background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), .08), rgba(var(--bs-primary-rgb), .03));
+    }
+    .guide-card {
+      border: 0;
+      border-radius: 1rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .guide-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 1rem 2rem rgba(0,0,0,.08);
+    }
+    .guide-avatar {
+      width: 160px; height: 160px; object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--bs-body-bg);
+      box-shadow: 0 0.5rem 1rem rgba(0,0,0,.08);
+    }
+    .badge-soft {
+      background-color: var(--bs-body-bg);
+      border: 1px solid rgba(0,0,0,.06);
+      color: var(--bs-body-color);
+    }
+    .card-title { letter-spacing: .2px; }
+
+    /* Back-to-top (optional, hidden by default) */
+    #backToTop {
+      position: fixed; bottom: 1rem; right: 1rem; z-index: 1080; display: none;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white sticky-top border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-semibold d-flex align-items-center" href="index.html">
+        <i class="bi bi-compass text-primary me-2"></i> GoTrip
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">Guides</a></li>
+          <li class="nav-item"><a class="nav-link" href="destination.html">Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" href="travellingmethods.html">Travelling Methods</a></li>
+        </ul>
+
+        <form class="d-none d-lg-flex me-3" role="search" onsubmit="event.preventDefault();">
+          <input class="form-control form-control-sm me-2" type="search" placeholder="Search guides..." aria-label="Search" />
+          <button class="btn btn-outline-primary btn-sm" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+
+        <div class="d-flex gap-2">
+          <button id="themeToggle" class="btn btn-outline-secondary btn-sm" type="button" aria-label="Toggle dark mode">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+          <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-person-plus me-1"></i>Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero border-bottom">
+    <div class="container py-5 text-center">
+      <h1 class="display-6 fw-semibold mb-2">Explore Sri Lanka with Trusted Guides</h1>
+      <p class="lead text-secondary mb-0">Friendly, professional drivers ready to make your journey unforgettable.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow-1">
+    <div class="container py-5">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        <!-- Guide 1 -->
+        <div class="col">
+          <div class="card guide-card h-100">
+            <div class="card-body text-center pt-4">
+              <div class="position-relative d-inline-block">
+                <img src="g1.webp" alt="Portrait of guide Ruwan Perera" class="guide-avatar" loading="lazy" width="160" height="160" data-name="Ruwan Perera" />
+                <span class="badge text-bg-success position-absolute top-0 end-0 translate-middle p-2" style="border-radius: 2rem;" data-bs-toggle="tooltip" title="Top rated">
+                  <i class="bi bi-star-fill"></i>
+                </span>
+              </div>
+              <h5 class="card-title mt-3 mb-1">Ruwan Perera</h5>
+              <p class="text-secondary small mb-3"><i class="bi bi-geo-alt text-primary me-1"></i>Hill Country Specialist</p>
+
+              <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                <span class="badge badge-soft"><i class="bi bi-car-front me-1"></i>AC Sedan</span>
+                <span class="badge badge-soft"><i class="bi bi-translate me-1"></i>English</span>
+                <span class="badge badge-soft"><i class="bi bi-shield-check me-1"></i>Licensed</span>
+              </div>
+
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="tel:+94712345678" class="btn btn-outline-primary btn-sm contact-btn" data-action="call" data-name="Ruwan Perera">
+                  <i class="bi bi-telephone me-1"></i> Call
+                </a>
+                <a href="https://wa.me/94712345678" target="_blank" class="btn btn-success btn-sm contact-btn" data-action="whatsapp" data-name="Ruwan Perera" rel="noopener">
+                  <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                </a>
+                <a href="mailto:ruwan@example.com" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="Ruwan Perera">
+                  <i class="bi bi-envelope me-1"></i> Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide 2 -->
+        <div class="col">
+          <div class="card guide-card h-100">
+            <div class="card-body text-center pt-4">
+              <div class="position-relative d-inline-block">
+                <img src="g2.webp" alt="Portrait of guide Chathura Silva" class="guide-avatar" loading="lazy" width="160" height="160" data-name="Chathura Silva" />
+                <span class="badge text-bg-success position-absolute top-0 end-0 translate-middle p-2" style="border-radius: 2rem;" data-bs-toggle="tooltip" title="Top rated">
+                  <i class="bi bi-star-fill"></i>
+                </span>
+              </div>
+              <h5 class="card-title mt-3 mb-1">Chathura Silva</h5>
+              <p class="text-secondary small mb-3"><i class="bi bi-geo-alt text-primary me-1"></i>Southern Coastal Expert</p>
+
+              <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                <span class="badge badge-soft"><i class="bi bi-car-front me-1"></i>Van</span>
+                <span class="badge badge-soft"><i class="bi bi-translate me-1"></i>English, German</span>
+                <span class="badge badge-soft"><i class="bi bi-shield-check me-1"></i>Licensed</span>
+              </div>
+
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="tel:+94719876543" class="btn btn-outline-primary btn-sm contact-btn" data-action="call" data-name="Chathura Silva">
+                  <i class="bi bi-telephone me-1"></i> Call
+                </a>
+                <a href="https://wa.me/94719876543" target="_blank" class="btn btn-success btn-sm contact-btn" data-action="whatsapp" data-name="Chathura Silva" rel="noopener">
+                  <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                </a>
+                <a href="mailto:chathura@example.com" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="Chathura Silva">
+                  <i class="bi bi-envelope me-1"></i> Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guide 3 -->
+        <div class="col">
+          <div class="card guide-card h-100">
+            <div class="card-body text-center pt-4">
+              <div class="position-relative d-inline-block">
+                <img src="g3.jpg" alt="Portrait of guide Thilina Jayasooriya" class="guide-avatar" loading="lazy" width="160" height="160" data-name="Thilina Jayasooriya" />
+                <span class="badge text-bg-success position-absolute top-0 end-0 translate-middle p-2" style="border-radius: 2rem;" data-bs-toggle="tooltip" title="Top rated">
+                  <i class="bi bi-star-fill"></i>
+                </span>
+              </div>
+              <h5 class="card-title mt-3 mb-1">Thilina Jayasooriya</h5>
+              <p class="text-secondary small mb-3"><i class="bi bi-geo-alt text-primary me-1"></i>Ancient Cities & Cultural Tours</p>
+
+              <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                <span class="badge badge-soft"><i class="bi bi-car-front me-1"></i>SUV</span>
+                <span class="badge badge-soft"><i class="bi bi-translate me-1"></i>English, French</span>
+                <span class="badge badge-soft"><i class="bi bi-shield-check me-1"></i>Licensed</span>
+              </div>
+
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="tel:+94711223344" class="btn btn-outline-primary btn-sm contact-btn" data-action="call" data-name="Thilina Jayasooriya">
+                  <i class="bi bi-telephone me-1"></i> Call
+                </a>
+                <a href="https://wa.me/94711223344" target="_blank" class="btn btn-success btn-sm contact-btn" data-action="whatsapp" data-name="Thilina Jayasooriya" rel="noopener">
+                  <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                </a>
+                <a href="mailto:thilina@example.com" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="Thilina Jayasooriya">
+                  <i class="bi bi-envelope me-1"></i> Email
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a id="backHome" href="index.html" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left me-1"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-body-tertiary border-top py-4 mt-auto">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+      <span class="text-secondary small">© <span id="year"></span> GoTrip. All rights reserved.</span>
+      <div class="d-flex gap-3">
+        <a href="#" class="link-secondary"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="link-secondary"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="link-secondary"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toasts -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="actionToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional: Back-to-top -->
+  <button id="backToTop" class="btn btn-primary btn-sm rounded-circle" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Page JS (vanilla) -->
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tooltips
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+
+    // Toast helpers
+    const toastEl = document.getElementById('actionToast');
+    const toastBody = toastEl.querySelector('.toast-body');
+    const toast = bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 1600 });
+    function showToast(message, variant = 'primary') {
+      toastEl.classList.remove('text-bg-primary','text-bg-success','text-bg-danger','text-bg-secondary','text-bg-warning');
+      toastEl.classList.add('text-bg-' + variant);
+      toastBody.textContent = message;
+      toast.show();
+    }
+
+    // Contact buttons: show toast, then navigate
+    document.querySelectorAll('.contact-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const href = btn.getAttribute('href');
+        const action = btn.dataset.action;
+        const name = btn.dataset.name || 'guide';
+        const messages = {
+          call: `Calling ${name}...`,
+          whatsapp: `Opening WhatsApp chat with ${name}...`,
+          email: `Composing email to ${name}...`
+        };
+        const variants = { call: 'primary', whatsapp: 'success', email: 'danger' };
+        showToast(messages[action] || 'Working...', variants[action] || 'primary');
+        setTimeout(() => window.location.href = href, 350);
+      });
+    });
+
+    // Double-click to "like" a guide (image)
+    document.querySelectorAll('.guide-avatar').forEach(img => {
+      img.addEventListener('dblclick', () => {
+        img.classList.toggle('border-warning');
+        showToast(`You liked ${img.dataset.name || 'this guide'}!`, 'warning');
+      });
+    });
+
+    // Back to home with toast
+    const backHome = document.getElementById('backHome');
+    backHome.addEventListener('click', e => {
+      e.preventDefault();
+      showToast('Returning to Home Page', 'secondary');
+      setTimeout(() => window.location.href = backHome.href, 350);
+    });
+
+    // Back-to-top button behavior
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.style.display = window.scrollY > 300 ? 'inline-flex' : 'none';
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Theme toggle (light/dark)
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const storedTheme = localStorage.getItem('theme');
+    function setTheme(theme) {
+      root.setAttribute('data-bs-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggleBtn.innerHTML = theme === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+      themeToggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    setTheme(storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    themeToggleBtn.addEventListener('click', () => {
+      const next = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+    });
+  </script>
+</body>
+</html>
