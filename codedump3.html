@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM Attribute Modification Example</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 5px;
+        }
+        img {
+            display: block;
+            margin-top: 10px;
+            width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>jQuery DOM Attribute Modification</h1>
+
+    <!-- Example 1: Image -->
+    <h2>1. Change Image Source</h2>
+    <img id="myImage" src="https://via.placeholder.com/150" alt="Placeholder Image">
+    <button id="changeSrc">Change Image</button>
+
+    <!-- Example 2: Link -->
+    <h2>2. Modify Link Attribute</h2>
+    <a id="myLink" href="https://example.com" target="_blank">Visit Example.com</a>
+    <button id="changeHref">Change Link</button>
+    <button id="removeHref">Remove Link</button>
+
+    <!-- Example 3: Input -->
+    <h2>3. Modify Input Attributes</h2>
+    <input id="myInput" type="text" placeholder="Type something">
+    <button id="disableInput">Disable Input</button>
+    <button id="enableInput">Enable Input</button>
+
+    <script>
+        $(document).ready(function() {
+            // Example 1: Change Image Source
+            $("#changeSrc").click(function() {
+                $("#myImage").attr("src", "https://via.placeholder.com/300");
+            });
+
+            // Example 2: Modify Link Attributes
+            $("#changeHref").click(function() {
+                $("#myLink").attr("href", "https://openai.com").text("Visit OpenAI");
+            });
+
+            $("#removeHref").click(function() {
+                $("#myLink").removeAttr("href");
+            });
+
+            // Example 3: Modify Input Attributes
+            $("#disableInput").click(function() {
+                $("#myInput").attr("disabled", true);
+            });
+
+            $("#enableInput").click(function() {
+                $("#myInput").removeAttr("disabled");
+            });
+        });
+    </script>
+</body>
+</html>
