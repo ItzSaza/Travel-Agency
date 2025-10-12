@@ -108,7 +108,7 @@
             </div>
 
             <div class="container mt-4" id="effects-section">
-                <!-- place items horizontally -->
+                
                 <div id="box"  style="margin:auto; border-radius:10px;  align-items: flex-start; display: flex;">
                     
                     <!-- <img src="" id="img1" alt=""class="img-responsive img-rounded center-block" style="width: auto; max-height:250px; margin-right:15px; border-radius:10px;"> -->
@@ -150,7 +150,7 @@
             </div>
 
 
-        <!-- DOM Traversal Demo -->
+        <!-- DOM Traversal -->
 <div class="text-center">
     <h3>✨ Explore Destinations</h3>
     <button id="highlightAncient" class="btn btn-warning">Highlight Ancient Destinations</button>
@@ -166,7 +166,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Highlight Ancient Destinations (toggle)
+    
     $('#highlightAncient').click(function() {
         $('.row > .col-md-4').each(function() {
             let desc = $(this).find('p').text().toLowerCase();
@@ -177,32 +177,32 @@
 
         let highlighted = $('.highlight').length;
         if (highlighted > 0) {
-            $('#messageArea').text('🗿 Highlighted historical/ancient destinations.');
+            $('#messageArea').text(' Highlighted historical/ancient destinations.');
         } else {
-            $('#messageArea').text('✅ Highlight removed.');
+            $('#messageArea').text('');
         }
     });
 
-    // Count Total Destinations
+    
     let countToggled = false;
     $('#countDestinations').click(function() {
         if (!countToggled) {
             let total = $('.row > .col-md-4').length;
-            $('#messageArea').text('📍 Total destinations listed: ' + total);
+            $('#messageArea').text(' Total destinations listed: ' + total);
         } else {
-            $('#messageArea').text('ℹ️ Ready to count again.');
+            $('#messageArea').text(' Ready to count again.');
         }
         countToggled = !countToggled;
     });
 
-    // Highlight Last Destination
+    
     $('#highlightLast').click(function() {
         let lastDest = $('.row > .col-md-4').last();
         lastDest.toggleClass('highlight');
         let lastName = lastDest.find('h4').text();
-        $('#messageArea').text('🏁 Highlighting final destination: ' + lastName);
+        $('#messageArea').text(' Highlighting final destination: ' + lastName);
 
-        // 2️⃣ Hover event — when hovering over navbar links
+        
         $(".nav > li > a").hover(
             function(){
             $(this).css({
@@ -218,7 +218,7 @@
             });
             }
         );
-        // 5️⃣ Navbar brand click — adds a quick visual animation
+        
         $(".navbar-brand").click(function(){
             $(this).fadeOut(150).fadeIn(400);
         });
@@ -254,7 +254,7 @@
       if (!$('#item1:hover, #item2:hover, #item3:hover').length) {
         $('#box').slideUp();
       }
-    }, 2000);
+    }, 200);
   }
 );
     $('#box2').slideUp();
@@ -284,11 +284,11 @@
       if (!$('#item4:hover, #item5:hover, #item6:hover').length) {
         $('#box2').slideUp();
       }
-    }, 2000);
+    }, 200);
   }
 );
 
-// 5️⃣ When "Back to Home" button is clicked
+
             $(".btn-default").click(function(){
                 alert("Returning to Home Page 🏠");
             });

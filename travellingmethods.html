@@ -79,28 +79,41 @@
             </style>
             
             <div class="row">
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 text-center" id="item1">
                     <img src="train.jpeg" class="img-responsive img-circle center-block" alt="" >
                     <h4>By train</h4>
                     <p>Famous for long ride trips at a low cost</p>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 text-center"id="item2">
                    <img src="bus2.jpg" class="img-responsive img-circle center-block" alt="Galle" >
                     <h4>By bus</h4>
                     <p>Famous for medium-to-long trips</p>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-md-4 text-center"id="item3">
                     <img src="threewheel.png" class="img-responsive img-circle center-block" alt="" >
                     <h4>By Three wheeler</h4>
                     <p>Best for short trips</p>
                 </div>
+
+
+
+                <div class="container mt-4" id="effects-section">
+                
+                <div id="box"  style="margin:auto; border-radius:10px;  align-items: flex-start; display: flex;">
+                    
+                    
+                    <p id="info" ></p>
+                </div>
+                
+    
+            </div>
             </div>
 
             <hr>
             
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <img src="rentaride.webp" class="img-responsive img-thumbnail center-block" alt="">
+                    <img src="rentaride.webp" class="img-responsive img-thumbnail center-block" alt=""id="item4">
                     <h4>Rent a ride</h4>
 
                 
@@ -109,7 +122,7 @@
 
 
                 <div class="col-md-4 text-center">
-                    <img src="uberpickme.jpeg" class="img-responsive img-responsive center-block" alt="">
+                    <img src="uberpickme.jpeg" class="img-responsive img-responsive center-block" alt=""id="item5">
                     <h4>Uber/Pickme</h4>
 
                     <p>Best for Price</p>
@@ -118,10 +131,19 @@
 
                 <div class="col-md-4 text-center">
                     
-                    <img src="privateair.avif" class="img-responsive img-responsive center-block" alt="" onclick="window.location.href='https://flyflapper.com/en-US/private-jet-charter/sri-lanka'">
+                    <img src="privateair.avif" class="img-responsive img-responsive center-block" alt="" onclick="window.location.href='https://flyflapper.com/en-US/private-jet-charter/sri-lanka'" id="item6">
                     <h4>Within-country aircraft</h4>
                     <p>Best for long-distance flights with comfort</p>
                 </div>
+
+                <div class="container mt-4" id="effects-section">
+                <div id="box2" style="margin:auto; border-radius:10px;  align-items: flex-start; display: flex;">
+                   
+                    <p id="info2"></p>
+                </div>
+                
+    
+            </div>
 
             </div>
 
@@ -138,7 +160,7 @@
         <script>
         $(document).ready(function(){
 
-        // 🚗 Hover effect — slightly zoom and add shadow to each travel method
+        
         $(".col-md-4").hover(
             function(){
             $(this).css({
@@ -158,7 +180,7 @@
             }
         );
 
-        // ✈️ Double-click on image — mark as favorite (adds green glow)
+        
         $("img").on("dblclick", function(){
             $(this)
             .css({
@@ -168,7 +190,7 @@
             .fadeOut(100).fadeIn(100);
         });
 
-        // 🚆 Mouse enter / leave — animate method names
+        
         $("h4").on({
             mouseenter: function(){
             $(this).css({
@@ -185,7 +207,7 @@
             }
         });
 
-        // 🏠 Back to Home button animation
+       
         $(".btn-default").on("click", function(){
             $(this)
             .text("Returning Home...")
@@ -194,7 +216,7 @@
             .text("Back to Home");
         });
 
-        // 2️⃣ Hover event — when hovering over navbar links
+        
         $(".nav > li > a").hover(
             function(){
             $(this).css({
@@ -211,13 +233,92 @@
             }
         );
 
-        // 5️⃣ Navbar brand click — adds a quick visual animation
+        
         $(".navbar-brand").click(function(){
             $(this).fadeOut(150).fadeIn(400);
         });
 
+
+
+
+
+
+
+$('#box').slideUp();
+    $('#item1, #item2, #item3').hover(
+  function() {
+    let text = '';
+
+    if (this.id === 'item1') {
+      text = '🚂 Enjoy scenic train journeys through Sri Lanka\'s picturesque landscapes at an affordable price!';
+        
+      
+    } 
+    else if (this.id === 'item2') {
+      text = '🚌 Travel comfortably across Sri Lanka\'s cities and towns with extensive bus routes and affordable fares!';
+        
+    } 
+    else if (this.id === 'item3') {
+      text = '🛺 Experience the convenience and fun of three-wheelers for short trips around Sri Lanka\'s towns and cities!';
+       
+    }
+
+    $('#info').text(text);
+    $('#box').slideDown(); 
+  },
+  function() {
+    
+    setTimeout(() => {
+      if (!$('#item1:hover, #item2:hover, #item3:hover').length) {
+        $('#box').slideUp();
+      }
+    }, 200);
+  }
+);
+    $('#box2').slideUp();
+    $('#item4, #item5, #item6').hover(
+  function() {
+    let text = '';
+
+    if (this.id === 'item4') {
+      text = '🚗 Rent a vehicle to explore Sri Lanka at your own pace and convenience!';
+        
+    } 
+    else if (this.id === 'item5') {
+      text = '🚖 Use Uber or PickMe for affordable and convenient rides across Sri Lanka\'s cities and towns!';
+        
+    } 
+    else if (this.id === 'item6') {
+      text = '✈️ Fly within Sri Lanka for quick and comfortable travel between major cities and tourist destinations!';
+        
+    }
+
+    $('#info2').text(text);
+    $('#box2').slideDown(); 
+  },
+  function() {
+    
+    setTimeout(() => {
+      if (!$('#item4:hover, #item5:hover, #item6:hover').length) {
+        $('#box2').slideUp();
+      }
+    }, 200);
+  }
+);
+
+
+
+
+
+
+
+
+
+
+
+
         });
-        // 5️⃣ When "Back to Home" button is clicked
+        
             $(".btn-default").click(function(){
                 alert("Returning to Home Page 🏠");
             });
