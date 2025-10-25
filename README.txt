@@ -1,3 +1,5 @@
+open index.html to view the webpage
+
 GROUP 2
 SA25610103 S G B Sathmira
 Sa25610068 B.w.d.s.wijenanda

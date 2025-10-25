@@ -111,9 +111,23 @@
         <h2 class="text-center">Our Travel Guides</h2>
         <p class="text-center">Friendly, professional drivers ready to make your journey unforgettable!</p>
 
-        <div class="row text-center">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="input-group w-50">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input id="guideSearch" type="search" class="form-control" placeholder="Search guides by name or specialty..." aria-label="Search guides">
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addGuideModal"><i class="bi bi-person-plus me-1"></i> Add Guide</button>
+            <div class="text-end">
+              <span class="badge bg-primary" id="visibleCount">3</span>
+              <small class="text-muted ms-2">visible</small>
+            </div>
+          </div>
+        </div>
 
-            <div class="col-md-4">
+        <div class="row text-center" id="guidesRow">
+
+            <div class="col-md-4 guide-item">
             <img src="g1.webp" alt="Portrait of guide Ruwan Perera" class="guide-avatar" loading="lazy" width="160" height="160" data-name="Ruwan Perera" />
             <h4>Ruwan Perera</h4>
             <p>Specialist in Hill Country Tours</p>
@@ -127,10 +141,11 @@
                 <a href="mailto:ruwan@example.com" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="Ruwan Perera">
                   <i class="bi bi-envelope me-1"></i> Email
                 </a>
+                <button type="button" class="btn btn-outline-danger btn-sm remove-btn ms-1" data-name="Ruwan Perera" title="Remove guide"><i class="bi bi-trash"></i></button>
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 guide-item">
             <img src="g2.webp" alt="Portrait of guide Chathura Silva" class="guide-avatar" loading="lazy" width="160" height="160" data-name="Chathura Silva" />
             <h4>Chathura Silva</h4>
             <p>Southern Coastal Expert</p>
@@ -144,10 +159,11 @@
                 <a href="mailto:chathura@example.com" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="Chathura Silva">
                   <i class="bi bi-envelope me-1"></i> Email
                 </a>
+                <button type="button" class="btn btn-outline-danger btn-sm remove-btn ms-1" data-name="Chathura Silva" title="Remove guide"><i class="bi bi-trash"></i></button>
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 guide-item">
             <img src="g3.jpg" alt="Portrait of guide Thilina Jayasooriya" class="guide-avatar" loading="lazy" width="160" height="160" data-name="Thilina Jayasooriya" />
             <h4>Thilina Jayasooriya</h4>
             <p>Ancient Cities & Cultural Tours</p>
@@ -161,6 +177,7 @@
                 <a href="mailto:thilina@example.com" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="Thilina Jayasooriya">
                   <i class="bi bi-envelope me-1"></i> Email
                 </a>
+                <button type="button" class="btn btn-outline-danger btn-sm remove-btn ms-1" data-name="Thilina Jayasooriya" title="Remove guide"><i class="bi bi-trash"></i></button>
               </div>
             </div>
 
@@ -171,6 +188,51 @@
         <div class="text-center">
             <a href="index.html" class="btn btn-default">Back to Home</a>
         </div>
+
+        <!-- Add Guide Modal  -->
+        <div class="modal fade" id="addGuideModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Add a new guide</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form id="addGuideForm">
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label class="form-label">Full name</label>
+                    <input type="text" class="form-control" id="newName" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Specialty / Short description</label>
+                    <input type="text" class="form-control" id="newDesc" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Phone (digits only)</label>
+                    <input type="tel" class="form-control" id="newPhone">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">WhatsApp number (optional)</label>
+                    <input type="text" class="form-control" id="newWhats">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="newEmail">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Image URL (optional)</label>
+                    <input type="url" class="form-control" id="newImg">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Add Guide</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         </div>
 
         
@@ -263,6 +325,60 @@
                 window.location.href = emailLink;
             });
             });
+
+      // --- Add / Remove functionality (using jQuery) ---
+      function updateVisibleCount() {
+        const vis = $(".guide-item:visible").length;
+        $("#visibleCount").text(vis);
+      }
+
+      // Remove handler (delegated)
+      $(document).on('click', '.remove-btn', function(){
+        const $col = $(this).closest('.guide-item');
+        const name = $(this).data('name') || $col.find('h4').text();
+        if (confirm('Remove "' + name + '"?')) {
+          $col.fadeOut(300, function(){ $(this).remove(); updateVisibleCount(); });
+        }
+      });
+
+      // Add guide form submission
+      $('#addGuideForm').on('submit', function(e){
+        e.preventDefault();
+        const name = $('#newName').val().trim();
+        const desc = $('#newDesc').val().trim();
+        const phone = $('#newPhone').val().trim();
+        const whats = $('#newWhats').val().trim();
+        const email = $('#newEmail').val().trim();
+        const img = $('#newImg').val().trim() || 'g1.webp';
+
+        // Build new guide column
+        const phoneLink = phone ? 'tel:' + phone : '#';
+        const whatsLink = whats ? ('https://wa.me/' + whats.replace(/[^0-9]/g,'')) : '#';
+        const emailLink = email ? ('mailto:' + email) : '#';
+
+        const $new = $(
+          '<div class="col-md-4 guide-item">' +
+          '<img src="'+img+'" alt="Portrait of guide '+name+'" class="guide-avatar" loading="lazy" width="160" height="160" data-name="'+name+'" />' +
+          '<h4>'+name+'</h4>' +
+          '<p>'+desc+'</p>' +
+          '<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">' +
+          '<a href="'+phoneLink+'" class="btn btn-outline-primary btn-sm contact-btn" data-action="call" data-name="'+name+'"><i class="bi bi-telephone me-1"></i> Call</a>' +
+          '<a href="'+whatsLink+'" target="_blank" class="btn btn-success btn-sm contact-btn" data-action="whatsapp" data-name="'+name+'"><i class="bi bi-whatsapp me-1"></i> WhatsApp</a>' +
+          '<a href="'+emailLink+'" class="btn btn-danger btn-sm contact-btn" data-action="email" data-name="'+name+'"><i class="bi bi-envelope me-1"></i> Email</a>' +
+          '<button type="button" class="btn btn-outline-danger btn-sm remove-btn ms-1" data-name="'+name+'" title="Remove guide"><i class="bi bi-trash"></i></button>' +
+          '</div></div>'
+        );
+
+        // Append and reset form + hide modal
+        $('#guidesRow').append($new);
+        $('#addGuideModal').modal('hide');
+        this.reset();
+        updateVisibleCount();
+        alert('Guide "' + name + '" added.');
+      });
+
+      // Ensure count is correct at start
+      updateVisibleCount();
 
             });
         </script>
