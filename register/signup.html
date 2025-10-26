@@ -11,6 +11,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
 
@@ -115,19 +117,35 @@
 </div>
 
   <script>
+    loadUsers();
 $(document).ready(function(){
 
   // Load all users when page loads
   function loadUsers() {
-    $.get("get_users.php", function(data){
+  $.ajax({
+    url: "get_user.php",     // ← singular filename
+    method: "GET",
+    dataType: "json",        // ← tell jQuery to parse JSON
+    success: function(data){
       $("#userList").empty();
-      data.forEach(function(user){
-        $("#userList").append(`<li class='list-group-item'>
-          ${user.fullname} (${user.email}) - ${user.country}
-        </li>`);
+      (data || []).forEach(function(user){
+        $("#userList").append(
+          `<li class="list-group-item">${user.fullname} (${user.email}) - ${user.country}</li>`
+        );
       });
-    });
-  }
+    },
+    error: function(xhr){
+      console.error("GET failed", xhr.status, xhr.responseText);
+      $("#alertBox")
+        .removeClass("d-none alert-success")
+        .addClass("alert-danger")
+        .text("Could not load users.");
+    }
+  });
+}
+
+
+  
   loadUsers();
 
   // Handle signup form submit
@@ -147,6 +165,7 @@ $(document).ready(function(){
       method: "POST",
       data: JSON.stringify(userData),
       contentType: "application/json",
+      dataType: "json",
       success: function(response){
         $("#alertBox")
           .removeClass("d-none alert-danger")
