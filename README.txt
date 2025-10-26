@@ -1,4 +1,9 @@
-open index.html to view the webpage
+how to open?
+1.open "www" folder of the wamp server in vscode
+2.open a new terminal and type the following
+git clone https://github.com/ItzSaza/Travel-Agency.git
+3.now again, open the folder created "Travel-Agency"
+4.edit files there, files will be synced anyway 
 
 GROUP 2
 SA25610103 S G B Sathmira
@@ -7,3 +12,5 @@ SA25610069 A.M.Hapugaswatte
 SA25610134 W.V.P.B.P Wijerathna
 SA25610217 S D Edirimanna
 SA25610231 M.A.Muhammed
+
+open index.html to view the webpage without any php
