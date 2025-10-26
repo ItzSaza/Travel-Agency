@@ -1,33 +1,34 @@
 <?php
-// header("Content-Type: application/json");
-// $data = json_decode(file_get_contents("user.json"), true);
-// echo json_encode($data);
-
-
-
-
-
 
 header('Content-Type: application/json; charset=utf-8');
 
-$file = __DIR__ . '/users.json'; // use the same file name everywhere
+$file = __DIR__ . '/users.json';
 
+// If the file is missing, return empty array (so the UI still works)
 if (!file_exists($file)) {
-    // Initialize empty array on first run
-    echo json_encode([]);
+    echo "[]";
     exit;
 }
 
-$json = file_get_contents($file);
-$data = json_decode($json, true);
-
-// If JSON malformed, fall back to empty list
-if (!is_array($data)) {
+// Try to read the file safely
+$fp = fopen($file, 'r');
+if (!$fp) {
     http_response_code(500);
-    echo json_encode([]);
+    echo json_encode(['status' => 'error', 'message' => 'Failed to open users.json']);
     exit;
 }
 
-echo json_encode($data);
+if (!flock($fp, LOCK_SH)) {
+    fclose($fp);
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Could not lock users.json']);
+    exit;
+}
 
-?>
+$contents = stream_get_contents($fp);
+flock($fp, LOCK_UN);
+fclose($fp);
+
+// If contents are invalid, still return an empty array
+$contents = trim($contents);
+echo $contents !== '' ? $contents : '[]';

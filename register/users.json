@@ -1,10 +1,16 @@
 [
-  {
-    "fullname": "John Doe",
-    "email": "john@example.com",
-    "password": "123456",
-    "country": "Sri Lanka",
-    "gender": "Male"
-  }
+    {
+        "fullname": "John Doe",
+        "email": "john@example.com",
+        "password": "123456",
+        "country": "Sri Lanka",
+        "gender": "Male"
+    },
+    {
+        "fullname": "cdasEDFC",
+        "email": "esafse@ds",
+        "password": "vsd",
+        "country": "vfs",
+        "gender": "Male"
+    }
 ]
-
