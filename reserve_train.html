@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Train Ticket | GoTrip</title>
+    
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        .booking-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-label { font-weight: 500; }
+        
+        .price-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #337ab7;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Copy the same navbar from trainreservations.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
+        <div class="container">
+          <a class="navbar-brand fw-semibold d-flex align-items-center" href="index.html" id="brand">
+            <i class="bi bi-compass text-primary me-2"></i> GoTrip
+          </a>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">Guides</a></li>
+              <li class="nav-item"><a class="nav-link" href="hotels.html">Hotels</a></li>
+              <li class="nav-item"><a class="nav-link" href="destination.html">Destinations</a></li>
+              <li class="nav-item"><a class="nav-link" href="travellingmethods.html">Travelling Methods</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="trainreservations.html">Train Reservations</a></li>
+            </ul>
+  
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+              <a class="btn btn-primary btn-sm" onclick="location.href='register/'"><i class="bi bi-person-plus me-1"></i>Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Train Ticket Reservation</h2>
+        
+        <div class="booking-form">
+            <form id="reservationForm" class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <!-- Passenger Information -->
+                    <div class="col-12">
+                        <h4 class="mb-3">Passenger Information</h4>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="passengerName" class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" id="passengerName" required>
+                        <div class="invalid-feedback">Please enter passenger name</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="contactNumber" class="form-label">Contact Number *</label>
+                        <input type="tel" class="form-control" id="contactNumber" required>
+                        <div class="invalid-feedback">Please enter contact number</div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">Please enter valid email address</div>
+                    </div>
+
+                    <!-- Journey Details -->
+                    <div class="col-12">
+                        <h4 class="mb-3 mt-4">Journey Details</h4>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="trainSelect" class="form-label">Select Train *</label>
+                        <select class="form-select" id="trainSelect" required>
+                            <option value="">Choose...</option>
+                            <option value="Udarata Menike">Udarata Menike (Colombo → Badulla)</option>
+                            <option value="Podi Menike">Podi Menike (Colombo → Badulla)</option>
+                            <option value="Kandy Express">Kandy Express (Colombo → Kandy)</option>
+                            <option value="Intercity Express">Intercity Express (Colombo → Kandy)</option>
+                            <option value="Rajadhani Express">Rajadhani Express (Colombo → Anuradhapura)</option>
+                            <option value="Coastal Line">Coastal Line (Colombo → Matara)</option>
+                            <option value="Blue Line">Blue Line (Colombo → Vavuniya)</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a train</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="travelDate" class="form-label">Travel Date *</label>
+                        <input type="date" class="form-control" id="travelDate" required>
+                        <div class="invalid-feedback">Please select travel date</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="seatClass" class="form-label">Seat Class *</label>
+                        <select class="form-select" id="seatClass" required>
+                            <option value="">Choose...</option>
+                            <option value="1st Class A/C">1st Class A/C</option>
+                            
+                            <option value="2nd Class">2nd Class</option>
+                            <option value="Sleeper">Sleeper</option>
+                        </select>
+                        <div class="invalid-feedback">Please select seat class</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="passengers" class="form-label">Number of Passengers *</label>
+                        <input type="number" class="form-control" id="passengers" min="1" max="10" value="1" required>
+                        <div class="invalid-feedback">Please enter number of passengers (1-10)</div>
+                    </div>
+
+                    <!-- Price Display -->
+                    <div class="col-12 text-end mt-4">
+                        <div class="price-display mb-3">
+                            Total Price: <span id="totalPrice">Rs. 0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col-12 text-center mt-4">
+                        <button class="btn btn-primary btn-lg px-5" type="submit">
+                            <i class="bi bi-check-circle me-2"></i>Confirm Reservation
+                        </button>
+                        <a href="trainreservations.html" class="btn btn-outline-secondary btn-lg ms-2">
+                            <i class="bi bi-arrow-left me-2"></i>Back
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('reservationForm');
+            const trainSelect = document.getElementById('trainSelect');
+            const seatClass = document.getElementById('seatClass');
+            const passengers = document.getElementById('passengers');
+            const totalPrice = document.getElementById('totalPrice');
+
+            // Price calculation
+            function updatePrice() {
+                const basePrice = {
+                    'Udarata Menike': 1500,
+                    'Podi Menike': 180,
+                    'Kandy Express': 300,
+                    'Intercity Express': 500,
+                    'Rajadhani Express': 800,
+                    'Coastal Line': 120,
+                    'Blue Line': 900
+                }[trainSelect.value] || 0;
+
+                const classMultiplier = {
+                    '1st Class A/C': 1,
+                    '1st Class Reserved': 0.8,
+                    '2nd Class': 0.6,
+                    'Sleeper': 1.2
+                }[seatClass.value] || 0;
+
+                const total = basePrice * classMultiplier * parseInt(passengers.value || 0);
+                totalPrice.textContent = `Rs. ${total.toFixed(2)}`;
+            }
+
+            [trainSelect, seatClass, passengers].forEach(el => 
+                el.addEventListener('change', updatePrice));
+
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                try {
+                    const formData = {
+                        trainName: trainSelect.value,
+                        passengerName: document.getElementById('passengerName').value,
+                        email: document.getElementById('email').value,
+                        contactNumber: document.getElementById('contactNumber').value,
+                        date: document.getElementById('travelDate').value,
+                        class: seatClass.value,
+                        passengers: passengers.value,
+                        price: totalPrice.textContent
+                    };
+
+                    const response = await fetch('addtrainreservations.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('Reservation successful!');
+                        window.location.href = 'trainreservations.html';
+                    } else {
+                        alert(result.message || 'Error making reservation');
+                    }
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            });
+
+            
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('travelDate').min = today;
+        });
+    </script>
+</body>
+</html>

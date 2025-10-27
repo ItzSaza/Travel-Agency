@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Ruwan Perera",
+    "desc": "Specialist in Hill Country Tours",
+    "phone": "+94712345678",
+    "whatsapp": "+94712345678",
+    "email": "ruwan@example.com",
+    "image": "g1.webp"
+  },
+  {
+    "name": "Chathura Silva",
+    "desc": "Southern Coastal Expert",
+    "phone": "+94719876543",
+    "whatsapp": "+94719876543",
+    "email": "chathura@example.com",
+    "image": "g2.webp"
+  },
+  {
+    "name": "Thilina Jayasooriya",
+    "desc": "Ancient Cities & Cultural Tours",
+    "phone": "+94711223344",
+    "whatsapp": "+94711223344",
+    "email": "thilina@example.com",
+    "image": "g3.jpg"
+  }
+]
