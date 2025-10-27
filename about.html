@@ -381,5 +381,39 @@
 
             });
         </script>
+
+        <script>
+$(document).ready(function() {
+  // Load guides from viewguides.php
+  function loadGuides() {
+    $.get('viewguides.php', function(data) {
+      $('#guidesRow').html(data);
+    });
+  }
+  loadGuides();
+
+  // Add guide form submission
+  $('#addGuideForm').on('submit', function(e) {
+    e.preventDefault();
+    $.post('addguide.php', {
+      name: $('#newName').val(),
+      desc: $('#newDesc').val(),
+      phone: $('#newPhone').val(),
+      whatsapp: $('#newWhats').val(),
+      email: $('#newEmail').val(),
+      image: $('#newImg').val()
+    }, function(response) {
+      if (response.status === 'success') {
+        $('#addGuideModal').modal('hide');
+        loadGuides();
+        alert('Guide added successfully!');
+      } else {
+        alert('Error adding guide.');
+      }
+    }, 'json');
+  });
+});
+</script>
+
     </body>
 </html>
