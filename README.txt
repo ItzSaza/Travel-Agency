@@ -9,7 +9,7 @@ git clone https://github.com/ItzSaza/Travel-Agency.git
 http://localhost/Travel-Agency/
 boom!
 
-
+  
 GROUP 2
 SA25610103 S G B Sathmira
 Sa25610068 B.w.d.s.wijenanda
