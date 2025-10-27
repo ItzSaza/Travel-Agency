@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Kandy",
+    "description": "Famous for the Temple of the Tooth and its beautiful ancient Lake.",
+    "image": "kandy.jpg",
+    "region": "Central Province",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "name": "Galle",
+    "description": "Historic city with colonial charm and stunning beaches.",
+    "image": "galle.jpg",
+    "region": "Southern Province",
+    "rating": 4
+  }
+]
