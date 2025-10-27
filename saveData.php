@@ -29,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT));
 
-    echo json_encode(["message" => "✅ Destination added successfully!"]);
+    echo json_encode(["message" => "Destination added successfully!"]);
 } else {
-    echo json_encode(["message" => "❌ Invalid request."]);
+    echo json_encode(["message" => "Invalid request."]);
 }
 ?>
