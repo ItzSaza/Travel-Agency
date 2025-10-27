@@ -31,6 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo json_encode(["message" => "Destination added successfully!"]);
 } else {
-    echo json_encode(["message" => "Invalid request."]);
+    echo json_encode(["message" => "Invalid request"]);
 }
 ?>
