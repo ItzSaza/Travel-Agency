@@ -271,6 +271,14 @@
       </div>
     </section>
 
+    <!-- User added hotels (loaded from hotels.json) -->
+    <section class="city-section mb-5">
+      <h2>User Added Hotels</h2>
+      <div class="row" id="userHotelsRow">
+        <!-- dynamically injected hotels will appear here -->
+      </div>
+    </section>
+
     <div class="text-center mt-4">
       <a href="index.html" class="btn btn-outline-secondary">Back to Home</a>
     </div>
@@ -281,22 +289,31 @@
   <script>
     document.getElementById('hotelForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const formData = new FormData(e.target);
       const messageDiv = document.getElementById('message');
-      
+
       try {
         const response = await fetch('add_hotel.php', {
           method: 'POST',
           body: formData
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
           messageDiv.className = 'alert alert-success';
           messageDiv.textContent = result.message;
           e.target.reset(); // Clear form
+
+          // If API returned the created hotel, append it immediately
+          if (result.hotel) {
+            renderHotel(result.hotel, 'userHotelsRow');
+          } else {
+            // Fallback: reload the list from the server
+            loadUserHotels();
+          }
+
           window.scrollTo(0, messageDiv.offsetTop - 20);
         } else {
           messageDiv.className = 'alert alert-danger';
@@ -307,6 +324,128 @@
         messageDiv.textContent = 'Error connecting to server';
       }
     });
+
+    // Helper to render a hotel card into a container row
+    function renderHotel(hotel, containerId = 'userHotelsRow') {
+      const row = document.getElementById(containerId);
+      if (!row) return;
+
+      const col = document.createElement('div');
+      col.className = 'col-md-4';
+
+      const card = document.createElement('div');
+      card.className = 'card hotel-card mb-4';
+
+      const img = document.createElement('img');
+      img.className = 'card-img-top';
+      img.alt = hotel.name || '';
+      img.src = hotel.image && hotel.image.trim() !== '' ? hotel.image : 'placeholder.jpg';
+
+      const body = document.createElement('div');
+      body.className = 'card-body';
+
+      const title = document.createElement('h5');
+      title.className = 'card-title';
+      title.textContent = hotel.name || 'Untitled';
+
+      const desc = document.createElement('p');
+      desc.className = 'card-text';
+      desc.textContent = hotel.description || '';
+
+      const link = document.createElement('a');
+      link.className = 'btn btn-primary btn-sm';
+      const q = encodeURIComponent(hotel.name || '');
+      link.href = 'https://www.booking.com/searchresults.html?ss=' + q;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'More info';
+
+      body.appendChild(title);
+      body.appendChild(desc);
+
+      const btnGroup = document.createElement('div');
+      btnGroup.className = 'd-flex gap-2';
+
+      // More info link
+      btnGroup.appendChild(link);
+
+      // Delete button (will call API)
+      const delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'btn btn-outline-danger btn-sm';
+      delBtn.textContent = 'Delete';
+      // store identifying info
+      if (hotel.id) delBtn.dataset.id = hotel.id;
+      if (hotel.name) delBtn.dataset.name = hotel.name;
+      if (hotel.location) delBtn.dataset.location = hotel.location;
+      delBtn.addEventListener('click', async function () {
+        if (!confirm('Remove "' + (hotel.name || 'this hotel') + '"?')) return;
+        // call delete endpoint
+        try {
+          const payload = {};
+          if (this.dataset.id) payload.id = this.dataset.id;
+          else {
+            payload.name = this.dataset.name || '';
+            payload.location = this.dataset.location || '';
+          }
+          const res = await fetch('delete_hotel.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const json = await res.json();
+          if (res.ok) {
+            // remove card from DOM
+            col.remove();
+            showMessage('success', json.message || 'Hotel removed');
+          } else {
+            showMessage('danger', json.message || 'Failed to remove hotel');
+          }
+        } catch (err) {
+          console.error(err);
+          showMessage('danger', 'Error connecting to server');
+        }
+      });
+
+      btnGroup.appendChild(delBtn);
+      body.appendChild(btnGroup);
+
+      card.appendChild(img);
+      card.appendChild(body);
+      col.appendChild(card);
+      row.appendChild(col);
+    }
+
+    // Load hotels from the PHP endpoint and render
+    async function loadUserHotels() {
+      try {
+        const res = await fetch('get_hotels.php', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        const row = document.getElementById('userHotelsRow');
+        if (!row) return;
+        row.innerHTML = '';
+        data.forEach(h => renderHotel(h, 'userHotelsRow'));
+      } catch (err) {
+        console.error('Failed to load hotels', err);
+      }
+    }
+
+    // Initial load
+    loadUserHotels();
+
+    // Small helper to show messages in the Add form area
+    function showMessage(type, text) {
+      const messageDiv = document.getElementById('message');
+      if (!messageDiv) return;
+      messageDiv.className = 'alert alert-' + (type === 'success' ? 'success' : 'danger');
+      messageDiv.textContent = text;
+      // auto-hide after 4s
+      setTimeout(() => {
+        messageDiv.className = '';
+        messageDiv.textContent = '';
+      }, 4000);
+    }
   </script>
 </body>
 </html>
