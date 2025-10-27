@@ -1,0 +1,84 @@
+{
+    "trains": {
+        "Udarata Menike": {
+            "route": "Colombo Fort → Badulla",
+            "classes": {
+                "1st Class A/C": 1500,
+                "1st Class Reserved": 1200,
+                "2nd Class": 900,
+                "Sleeper": 1800
+            }
+        },
+        "Podi Menike": {
+            "route": "Colombo Fort → Badulla",
+            "classes": {
+                "1st Class A/C": 1400,
+                "1st Class Reserved": 1100,
+                "2nd Class": 180,
+                "Sleeper": 1600
+            }
+        },
+        "Kandy Express": {
+            "route": "Colombo Fort → Kandy",
+            "classes": {
+                "1st Class A/C": 400,
+                "1st Class Reserved": 300,
+                "2nd Class": 180,
+                "Sleeper": null
+            }
+        },
+        "Intercity Express": {
+            "route": "Colombo Fort → Kandy",
+            "classes": {
+                "1st Class A/C": 500,
+                "1st Class Reserved": 400,
+                "2nd Class": 250,
+                "Sleeper": null
+            }
+        },
+        "Rajadhani Express": {
+            "route": "Colombo Fort → Anuradhapura",
+            "classes": {
+                "1st Class A/C": 800,
+                "1st Class Reserved": 650,
+                "2nd Class": 400,
+                "Sleeper": 950
+            }
+        },
+        "Galle Express": {
+            "route": "Colombo Fort → Galle",
+            "classes": {
+                "1st Class A/C": 350,
+                "1st Class Reserved": 240,
+                "2nd Class": 150,
+                "Sleeper": null
+            }
+        },
+        "Coastal Line": {
+            "route": "Colombo Fort → Matara",
+            "classes": {
+                "1st Class A/C": 200,
+                "1st Class Reserved": 160,
+                "2nd Class": 120,
+                "Sleeper": null
+            }
+        },
+        "Blue Line": {
+            "route": "Colombo Fort → Vavuniya",
+            "classes": {
+                "1st Class A/C": 1100,
+                "1st Class Reserved": 900,
+                "2nd Class": 600,
+                "Sleeper": 1300
+            }
+        }
+    },
+    "discounts": {
+        "early_bird": 0.10,
+        "senior_citizen": 0.15,
+        "student": 0.20,
+        "group_10_plus": 0.12
+    },
+    "currency": "LKR",
+    "last_updated": "2024-02-21"
+}
