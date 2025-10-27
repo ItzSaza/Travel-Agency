@@ -38,6 +38,7 @@ if ($name === '') {
 }
 
 $newHotel = [
+    'id' => uniqid('', true),
     'name' => $name,
     'description' => $description,
     'image' => $image,
