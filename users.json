@@ -33,5 +33,12 @@
         "password": "123",
         "country": "sl",
         "gender": "Other"
+    },
+    {
+        "fullname": "abc",
+        "email": "abc@gm",
+        "password": "asd",
+        "country": "asd",
+        "gender": "Male"
     }
 ]

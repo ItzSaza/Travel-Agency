@@ -2,7 +2,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 // Path to the users.json file
-$file = __DIR__ . '/users.json';
+$file = 'users.json';
 
 // Read existing users
 if (!file_exists($file)) {
@@ -31,6 +31,7 @@ foreach ($data as $user) {
     // Compare email case-insensitive
     if (strcasecmp($user['email'], $email) === 0 && $user['password'] === $password) {
         $found = true;
+        window.alert("Login successful!");
         echo json_encode([
             "status" => "success",
             "message" => "Login successful!",
