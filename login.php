@@ -1,34 +1,47 @@
 <?php
-header("Content-Type: application/json");
+header('Content-Type: application/json; charset=utf-8');
 
-// Path to your JSON data file
-$jsonFile = "users.json";
+// Path to the users.json file
+$file = __DIR__ . '/users.json';
 
-// Decode the JSON data into a PHP array
-if (!file_exists($jsonFile)) {
+// Read existing users
+if (!file_exists($file)) {
     echo json_encode(["status" => "error", "message" => "No users found."]);
     exit;
 }
 
-$data = json_decode(file_get_contents($jsonFile), true);
+$data = json_decode(file_get_contents($file), true);
+if (!is_array($data)) $data = [];
 
-// Get login data from AJAX request
-$input = json_decode(file_get_contents("php://input"), true);
-$email = $input['email'];
-$password = $input['password'];
+// Get JSON input from AJAX
+$raw = file_get_contents('php://input');
+$input = json_decode($raw, true);
+
+$email = trim($input['email'] ?? '');
+$password = trim($input['password'] ?? '');
+
+if (!$email || !$password) {
+    echo json_encode(["status" => "error", "message" => "Email and password are required."]);
+    exit;
+}
 
 // Check credentials
+$found = false;
 foreach ($data as $user) {
-    if ($user['email'] === $email && $user['password'] === $password) {
+    // Compare email case-insensitive
+    if (strcasecmp($user['email'], $email) === 0 && $user['password'] === $password) {
+        $found = true;
         echo json_encode([
             "status" => "success",
             "message" => "Login successful!",
-            "name" => $user['name']
+            "name" => $user['fullname']
         ]);
-        exit;
+        break;
     }
 }
 
 // If not matched
-echo json_encode(["status" => "error", "message" => "Invalid email or password."]);
+if (!$found) {
+    echo json_encode(["status" => "error", "message" => "Invalid email or password."]);
+}
 ?>
