@@ -134,7 +134,35 @@
         <a href="#">Forgot Password?</a> • 
         <a href="register.html">Create Account</a>
       </div>
+      
     </form>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$("form").submit(function(e) {
+    e.preventDefault(); // stop default form submission
+
+    const email = $("#email").val().trim();
+    const password = $("#password").val().trim();
+
+    $.ajax({
+        url: "login.php",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ email, password }),
+        dataType: "json",
+        success: function(res) {
+            alert(res.message);
+            if(res.status === "success"){
+                window.location.href = "index.html"; // redirect after login
+            }
+        },
+        error: function() {
+            alert("Login failed. Check console for errors.");
+        }
+    });
+});
+</script>
+
   </div>
 </body>
 </html>
