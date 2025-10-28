@@ -187,7 +187,7 @@
             [trainSelect, seatClass, passengers].forEach(el => 
                 el.addEventListener('change', updatePrice));
 
-            // Form submission
+            
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 if (!form.checkValidity()) {
@@ -226,7 +226,7 @@
                 }
             });
 
-            // Set minimum date to today
+            
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('travelDate').min = today;
         });

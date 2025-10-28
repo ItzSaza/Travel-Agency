@@ -310,6 +310,61 @@
         <a href="travellingmethods.html" class="btn btn-primary" style="background-color: #337ab7; border-color: #337ab7;">View All Travel Methods</a>
     </div>
 
+    <!-- Add this modal markup before the footer -->
+    <div class="modal fade" id="reservationDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reservation Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Reservation ID:</th>
+                                    <td id="modalReservationId"></td>
+                                </tr>
+                                <tr>
+                                    <th>Passenger Name:</th>
+                                    <td id="modalPassengerName"></td>
+                                </tr>
+                                <tr>
+                                    <th>Train:</th>
+                                    <td id="modalTrainName"></td>
+                                </tr>
+                                <tr>
+                                    <th>Route:</th>
+                                    <td id="modalRoute"></td>
+                                </tr>
+                                <tr>
+                                    <th>Travel Date:</th>
+                                    <td id="modalDate"></td>
+                                </tr>
+                                <tr>
+                                    <th>Class:</th>
+                                    <td id="modalClass"></td>
+                                </tr>
+                                <tr>
+                                    <th>Price:</th>
+                                    <td id="modalPrice"></td>
+                                </tr>
+                                <tr>
+                                    <th>Booked On:</th>
+                                    <td id="modalTimestamp"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2025 GoTrip - Your trusted travel partner in Sri Lanka. Book with confidence and explore the pearl of the Indian Ocean.</p>
     </footer>
@@ -320,6 +375,21 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const reservationModal = new bootstrap.Modal(document.getElementById('reservationDetailModal'));
+
+        // Function to show reservation details in modal
+        function showReservationDetails(reservation) {
+            document.getElementById('modalReservationId').textContent = reservation.reservationId;
+            document.getElementById('modalPassengerName').textContent = reservation.passengerName;
+            document.getElementById('modalTrainName').textContent = reservation.trainName;
+            document.getElementById('modalRoute').textContent = reservation.route;
+            document.getElementById('modalDate').textContent = reservation.date;
+            document.getElementById('modalClass').textContent = reservation.class;
+            document.getElementById('modalPrice').textContent = reservation.price;
+            document.getElementById('modalTimestamp').textContent = new Date(reservation.timestamp).toLocaleString();
+            reservationModal.show();
+        }
+
         // Function to load and display current reservations
         async function loadReservations() {
             const tbody = document.getElementById('reservationsList');
@@ -329,7 +399,7 @@
                 
                 if (data.success && data.reservations.length > 0) {
                     tbody.innerHTML = data.reservations.map(res => `
-                        <tr>
+                        <tr class="reservation-row" style="cursor: pointer" data-reservation='${JSON.stringify(res)}'>
                             <td>${res.reservationId}</td>
                             <td>${res.passengerName}</td>
                             <td>${res.trainName}</td>
@@ -340,6 +410,22 @@
                             <td>${new Date(res.timestamp).toLocaleString()}</td>
                         </tr>
                     `).join('');
+
+                    // Add click handlers to rows
+                    document.querySelectorAll('.reservation-row').forEach(row => {
+                        row.addEventListener('click', function() {
+                            const reservation = JSON.parse(this.dataset.reservation);
+                            showReservationDetails(reservation);
+                        });
+
+                        // Add hover effect
+                        row.addEventListener('mouseenter', function() {
+                            this.style.backgroundColor = '#f5f5f5';
+                        });
+                        row.addEventListener('mouseleave', function() {
+                            this.style.backgroundColor = '';
+                        });
+                    });
                 } else {
                     tbody.innerHTML = '<tr><td colspan="8" class="text-center">No reservations found</td></tr>';
                 }
