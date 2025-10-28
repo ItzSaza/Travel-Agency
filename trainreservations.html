@@ -232,11 +232,22 @@
 
     <!-- Current reservations -->
     <div class="card mb-4">
-      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <div class="card-header bg-primary text-white d-flex flex-wrap gap-2 justify-content-between align-items-center">
         <h3 class="h5 mb-0">Current Reservations</h3>
-        <button type="button" id="refreshBtn" class="btn btn-light btn-sm">
-          <i class="bi bi-arrow-clockwise"></i> Refresh
-        </button>
+        <div class="d-flex gap-2 align-items-center">
+          <div class="input-group input-group-sm">
+            <input type="text" id="searchReservationId" class="form-control" placeholder="Reservation ID">
+            <button class="btn btn-light" id="viewOneBtn" title="View one">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+          <button type="button" id="refreshBtn" class="btn btn-light btn-sm">
+            <i class="bi bi-arrow-clockwise"></i> Refresh
+          </button>
+          <button type="button" id="openAddModalBtn" class="btn btn-warning btn-sm">
+            <i class="bi bi-plus-circle"></i> Add
+          </button>
+        </div>
       </div>
       <div class="card-body">
         <div id="reservationsTable" class="table-responsive">
@@ -268,7 +279,7 @@
       <a href="travellingmethods.html" class="btn btn-primary">View All Travel Methods</a>
     </div>
 
-    <!-- Modal -->
+    <!-- Reservation Details Modal -->
     <div class="modal fade" id="reservationDetailModal" tabindex="-1" aria-hidden="true" aria-labelledby="reservationDetailTitle">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -299,12 +310,88 @@
       </div>
     </div>
 
+    <!-- Add Reservation Modal -->
+    <div class="modal fade" id="addReservationModal" tabindex="-1" aria-hidden="true" aria-labelledby="addReservationTitle">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="addReservationForm" class="needs-validation" novalidate>
+            <div class="modal-header">
+              <h5 id="addReservationTitle" class="modal-title">Add Reservation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label">Passenger Name *</label>
+                  <input type="text" class="form-control" name="passengerName" required>
+                  <div class="invalid-feedback">Required</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Train *</label>
+                  <select class="form-select" name="trainName" required>
+                    <option value="">Choose…</option>
+                    <option>Udarata Menike</option>
+                    <option>Podi Menike</option>
+                    <option>Kandy Express</option>
+                    <option>Intercity Express</option>
+                    <option>Rajadhani Express</option>
+                    <option>Coastal Line</option>
+                    <option>Blue Line</option>
+                  </select>
+                  <div class="invalid-feedback">Required</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Class *</label>
+                  <select class="form-select" name="class" required>
+                    <option value="">Choose…</option>
+                    <option>1st Class A/C</option>
+                    <option>2nd Class</option>
+                    <option>Sleeper</option>
+                  </select>
+                  <div class="invalid-feedback">Required</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Travel Date *</label>
+                  <input type="date" class="form-control" name="date" required>
+                  <div class="invalid-feedback">Required</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Passengers *</label>
+                  <input type="number" class="form-control" name="passengers" min="1" value="1" required>
+                  <div class="invalid-feedback">Required</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Price (e.g. Rs. 1500.00) *</label>
+                  <input type="text" class="form-control" name="price" required>
+                  <div class="invalid-feedback">Required</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Contact Number</label>
+                  <input type="text" class="form-control" name="contactNumber">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+              <button class="btn btn-primary" type="submit">
+                <i class="bi bi-check2-circle me-1"></i>Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <p>&copy; 2025 GoTrip - Your trusted travel partner in Sri Lanka. Book with confidence and explore the pearl of the Indian Ocean.</p>
     </footer>
   </div>
 
-  <!-- jQuery (for AJAX) -->
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <!-- Bootstrap bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -312,28 +399,17 @@
   <script>
     $(function () {
       const $tbody = $('#reservationsList');
-      const modalEl = document.getElementById('reservationDetailModal');
-      const reservationModal = new bootstrap.Modal(modalEl);
+      const detailModal = new bootstrap.Modal(document.getElementById('reservationDetailModal'));
+      const addModal = new bootstrap.Modal(document.getElementById('addReservationModal'));
 
-      function fmtDate(ts) {
-        return ts ? new Date(ts).toLocaleString() : '';
-      }
-
-      function showReservationDetails(res) {
-        $('#modalReservationId').text(res.reservationId || '');
-        $('#modalPassengerName').text(res.passengerName || '');
-        $('#modalTrainName').text(res.trainName || '');
-        $('#modalRoute').text(res.route || '');
-        $('#modalDate').text(res.date || '');
-        $('#modalClass').text(res.class || '');
-        $('#modalPrice').text(res.price || '');
-        $('#modalTimestamp').text(fmtDate(res.timestamp));
-        reservationModal.show();
-      }
+      // ---------- helpers ----------
+      const fmtDate = (ts) => ts ? new Date(ts).toLocaleString() : '';
+      const showEmpty = (msg, danger) =>
+        $tbody.html('<tr><td colspan="8" class="text-center ' + (danger ? 'text-danger' : '') + '">' + msg + '</td></tr>');
 
       function renderReservations(reservations) {
         $tbody.empty();
-        reservations.forEach(function (res) {
+        reservations.forEach((res) => {
           const $tr = $('<tr>')
             .addClass('reservation-row')
             .attr('tabindex', 0)
@@ -353,62 +429,169 @@
         });
       }
 
-      function showEmpty(message, isError) {
-        const cls = isError ? 'text-danger' : '';
-        $tbody.html('<tr><td colspan="8" class="text-center ' + cls + '">' + message + '</td></tr>');
+      function showReservationDetails(res) {
+        $('#modalReservationId').text(res.reservationId || '');
+        $('#modalPassengerName').text(res.passengerName || '');
+        $('#modalTrainName').text(res.trainName || '');
+        $('#modalRoute').text(res.route || '');
+        $('#modalDate').text(res.date || '');
+        $('#modalClass').text(res.class || '');
+        $('#modalPrice').text(res.price || '');
+        $('#modalTimestamp').text(fmtDate(res.timestamp));
+        detailModal.show();
       }
 
-      function loadReservations() {
+      // ========== API METHODS ==========
+      // VIEW ALL
+      function apiViewAllReservations() {
         showEmpty('Loading reservations...');
-        $.ajax({
+        return $.ajax({
           url: 'viewtrainreservations.php',
           method: 'GET',
           dataType: 'json',
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
-        .done(function (data) {
+        .done((data) => {
           if (data && data.success && Array.isArray(data.reservations) && data.reservations.length) {
             renderReservations(data.reservations);
           } else {
             showEmpty('No reservations found');
           }
         })
-        .fail(function () {
-          showEmpty('Error loading reservations', true);
+        .fail(() => showEmpty('Error loading reservations', true));
+      }
+
+      // VIEW SPECIFIC ONE (by ID)
+      function apiViewReservationById(reservationId) {
+        if (!reservationId) {
+          showEmpty('Please enter a Reservation ID');
+          return;
+        }
+        showEmpty('Searching…');
+
+        // Option A: backend supports ?id= filter
+        return $.ajax({
+          url: 'viewtrainreservations.php',
+          method: 'GET',
+          data: { id: reservationId },
+          dataType: 'json',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .done((data) => {
+          // if server returns a single object
+          if (data && data.success && data.reservation) {
+            renderReservations([data.reservation]);
+            return;
+          }
+          // if server returns the full list, filter client-side (fallback)
+          if (data && data.success && Array.isArray(data.reservations)) {
+            const match = data.reservations.find(r => String(r.reservationId) === String(reservationId));
+            if (match) {
+              renderReservations([match]);
+            } else {
+              showEmpty('No reservation found for ID: ' + reservationId);
+            }
+            return;
+          }
+          showEmpty('No reservation found for ID: ' + reservationId);
+        })
+        .fail(() => showEmpty('Error searching reservation', true));
+      }
+
+      // ADD
+      function apiAddReservation(payload) {
+        // Adjust contentType to 'application/x-www-form-urlencoded; charset=UTF-8'
+        // if your PHP expects standard form POST instead of JSON.
+        return $.ajax({
+          url: 'addtrainreservations.php',
+          method: 'POST',
+          data: JSON.stringify(payload),
+          contentType: 'application/json',
+          dataType: 'json',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
         });
       }
 
-      // Row interactions via event delegation
+      // ========== UI wiring ==========
+      // Row interactions (delegate)
       $('#reservationsTable')
         .on('click', '.reservation-row', function () {
           const res = $(this).data('reservation') || {};
           showReservationDetails(res);
         })
         .on('keypress', '.reservation-row', function (e) {
-          if (e.which === 13 || e.which === 32) { // Enter/Space
-            $(this).trigger('click');
-            e.preventDefault();
-          }
+          if (e.which === 13 || e.which === 32) { $(this).trigger('click'); e.preventDefault(); }
         })
         .on('mouseenter', '.reservation-row', function () { $(this).addClass('table-active'); })
         .on('mouseleave', '.reservation-row', function () { $(this).removeClass('table-active'); });
 
-      // Refresh button
-      $('#refreshBtn').on('click', loadReservations);
-
-      // Brand flash effect
-      $('#brand').on('click', function () {
-        const el = this;
-        $(el).removeClass('brand-flash');
-        void el.offsetWidth; // reflow
-        $(el).addClass('brand-flash');
+      // Buttons
+      $('#refreshBtn').on('click', apiViewAllReservations);
+      $('#viewOneBtn').on('click', function () {
+        const id = $('#searchReservationId').val().trim();
+        apiViewReservationById(id);
+      });
+      $('#searchReservationId').on('keypress', function (e) {
+        if (e.which === 13) {
+          $('#viewOneBtn').click();
+          e.preventDefault();
+        }
+      });
+      $('#openAddModalBtn').on('click', function () {
+        // set min date (today)
+        const today = new Date().toISOString().split('T')[0];
+        $('#addReservationForm [name="date"]').attr('min', today);
+        $('#addReservationForm')[0].reset();
+        $('#addReservationForm').removeClass('was-validated');
+        addModal.show();
       });
 
-      // Initial load
-      loadReservations();
+      // Add form submit -> call ADD method
+      $('#addReservationForm').on('submit', function (e) {
+        e.preventDefault();
+        const form = this;
+        if (!form.checkValidity()) {
+          e.stopPropagation();
+          $(form).addClass('was-validated');
+          return;
+        }
+        const payload = {
+          passengerName: form.passengerName.value.trim(),
+          trainName: form.trainName.value,
+          class: form.class.value,
+          date: form.date.value,
+          passengers: form.passengers.value,
+          price: form.price.value,
+          email: form.email.value.trim() || undefined,
+          contactNumber: form.contactNumber.value.trim() || undefined
+        };
+        apiAddReservation(payload)
+          .done(function (res) {
+            if (res && res.success) {
+              addModal.hide();
+              apiViewAllReservations();
+            } else {
+              alert(res && res.message ? res.message : 'Error adding reservation');
+            }
+          })
+          .fail(function () {
+            alert('Error adding reservation');
+          });
+      });
 
-      // expose if you still want global access (optional)
-      window.loadReservations = loadReservations;
+      // Brand flash effect (kept)
+      $('#brand').on('click', function () {
+        const el = this;
+        $(el).removeClass('brand-flash'); void el.offsetWidth; $(el).addClass('brand-flash');
+      });
+
+      // Initial load = VIEW ALL
+      apiViewAllReservations();
+
+      // (Optional) expose for console debugging
+      window.apiViewAllReservations = apiViewAllReservations;
+      window.apiViewReservationById = apiViewReservationById;
+      window.apiAddReservation = apiAddReservation;
     });
   </script>
 </body>
