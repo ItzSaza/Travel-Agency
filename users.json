@@ -26,5 +26,12 @@
         "password": "sferfes",
         "country": "efsfe",
         "gender": "Other"
+    },
+    {
+        "fullname": "dulara",
+        "email": "dulara@gmail.com",
+        "password": "123",
+        "country": "sl",
+        "gender": "Other"
     }
 ]
