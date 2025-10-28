@@ -229,6 +229,17 @@
     </div>
 
     <hr class="my-4">
+    
+    <!-- Search Reservation -->
+    <div class="mb-4">
+      <h3 class="h5">Search Reservation</h3>
+      <div class="input-group">
+        <input type="text" id="searchReservationId" class="form-control" placeholder="Enter Reservation ID" />
+        <button id="searchBtn" class="btn btn-primary">Search</button>
+      </div>
+      <div id="searchResult" class="mt-2"></div>
+    </div>
+    <hr class="my-4">
 
     <!-- Current reservations -->
     <div class="card mb-4">
@@ -374,6 +385,8 @@
         $('#modalPrice').text(res.price || '');
         $('#modalTimestamp').text(fmtDate(res.timestamp));
         reservationModal.show();
+
+
       }
       
     $(document).on('click', '.reservation-row', function () {
@@ -392,6 +405,44 @@
         $(el).removeClass('brand-flash');
         void el.offsetWidth; // reflow
         $(el).addClass('brand-flash');
+      });
+
+      // Search reservation by ID
+      $('#searchBtn').on('click', function () {
+        const reservationId = $('#searchReservationId').val();
+        if (reservationId) {
+          $.ajax({
+            url: 'viewtrainreservations.php',
+            method: 'GET',
+            data: { id: reservationId },
+            dataType: 'json'
+          })
+          .done(function (data) {
+            if (data.reservation) {
+              const res = data.reservation;
+              $('#searchResult').html(`
+                <div class="alert alert-success">
+                  <strong>Reservation Found:</strong><br>
+                  ID: ${res.reservationId}<br>
+                  Name: ${res.passengerName}<br>
+                  Train: ${res.trainName}<br>
+                  Route: ${res.route}<br>
+                  Date: ${res.date}<br>
+                  Class: ${res.class}<br>
+                  Price: ${res.price}<br>
+                  Booked On: ${fmtDate(res.timestamp)}
+                </div>
+              `);
+            } else {
+              $('#searchResult').html('<div class="alert alert-danger">No reservation found with that ID.</div>');
+            }
+          })
+          .fail(function () {
+            $('#searchResult').html('<div class="alert alert-danger">Error searching for reservation.</div>');
+          });
+        } else {
+          $('#searchResult').html('<div class="alert alert-warning">Please enter a Reservation ID.</div>');
+        }
       });
 
       // Initial load
