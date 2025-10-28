@@ -33,5 +33,12 @@
         "password": "123",
         "country": "sl",
         "gender": "Other"
+    },
+    {
+        "fullname": "qwerty",
+        "email": "qwerty@gmail.com",
+        "password": "qaz",
+        "country": "saddsfdsf",
+        "gender": "Male"
     }
 ]
