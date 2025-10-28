@@ -35,17 +35,10 @@
         "gender": "Other"
     },
     {
-<<<<<<< HEAD
-        "fullname": "abc",
-        "email": "abc@gm",
-        "password": "asd",
-        "country": "asd",
-=======
         "fullname": "qwerty",
         "email": "qwerty@gmail.com",
         "password": "qaz",
         "country": "saddsfdsf",
->>>>>>> 05c3d7a8dd25b9492293722d051cdda3a393f2fe
         "gender": "Male"
     }
 ]
